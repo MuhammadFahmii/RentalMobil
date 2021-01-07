@@ -8,11 +8,12 @@ Simple implementation MVC DAO Java
   
 ### Installation
 
-1. Import database ke Webserver, Import library 
-2. Sesuaikan inputstream di koneksiDB sesuai dengan path konfigDB kalian
-2. Jalankan Webserver
-3. Jalankan dengan klik Run pada IDE (Netbeans) atau click f6
-4. Enjoy
+1. Import database ke Webserver
+2. Import library 
+3. Sesuaikan inputstream di koneksiDB sesuai dengan path konfigDB kalian
+4. Jalankan Webserver
+5. Jalankan dengan klik Run pada IDE (Netbeans) atau click f6
+6. Enjoy
 
 ### Support
 
