@@ -4,7 +4,7 @@ Simple implementation MVC DAO Java
 ### Build With
 
 - Java
-- Library JDateChooser
+- Library JCalendar
   
 ### Installation
 
