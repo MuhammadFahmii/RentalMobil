@@ -5,6 +5,7 @@
  */
 package MVC.view;
 
+import MVC.controller.MobilController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ public final class MainView extends javax.swing.JFrame {
     private final TransaksiView transaksiView;
     private final HomeView homeView;
     private final MobilView mobilView;
+    private final MobilController controller;
     
     /** Creates new form MainView
      * @throws java.sql.SQLException 
@@ -26,6 +28,7 @@ public final class MainView extends javax.swing.JFrame {
         transaksiView = new TransaksiView();
         homeView = new HomeView();
         mobilView = new MobilView();
+        controller = new MobilController(mobilView);
        
         contentPanel.add(homeView);
     }
@@ -141,6 +144,7 @@ public final class MainView extends javax.swing.JFrame {
 
     private void btnMobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMobilActionPerformed
         // TODO add your handling code here:
+        controller.getAllMobil();
         contentPanel.removeAll();
         contentPanel.repaint();
         contentPanel.add(mobilView);

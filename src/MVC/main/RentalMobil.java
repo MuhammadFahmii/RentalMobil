@@ -21,6 +21,7 @@ public class RentalMobil {
             main.setVisible(true);
         } catch(SQLException ex){
             JOptionPane.showMessageDialog(main, "Database Tidak Ditemukan");
+            System.exit(0);
         }
     }
 }

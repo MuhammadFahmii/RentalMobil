@@ -88,6 +88,8 @@ public class MobilView extends javax.swing.JPanel {
         txtNopol = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(225, 112, 85));
+        setPreferredSize(new java.awt.Dimension(1050, 404));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnReset.setBackground(new java.awt.Color(0, 0, 0));
         btnReset.setForeground(new java.awt.Color(255, 255, 255));
@@ -97,6 +99,7 @@ public class MobilView extends javax.swing.JPanel {
                 btnResetActionPerformed(evt);
             }
         });
+        add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 350, -1, -1));
 
         btnDelete.setBackground(new java.awt.Color(0, 0, 0));
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
@@ -106,9 +109,14 @@ public class MobilView extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, -1, -1));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Status");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 300, -1, -1));
+        add(txtMerek, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 223, -1));
+        add(txtTipe, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 140, 223, -1));
+        add(txtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 223, -1));
 
         tblMobil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,17 +134,24 @@ public class MobilView extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblMobil);
 
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 62, 610, 330));
+
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tahun");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, -1, -1));
 
         txtIdMobil.setEditable(false);
         txtIdMobil.setEnabled(false);
+        add(txtIdMobil, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 60, 223, -1));
+        add(txtTahun, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 180, 223, -1));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Merek");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, -1, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Id_Mobil");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, -1, -1));
 
         btnSimpan.setBackground(new java.awt.Color(0, 0, 0));
         btnSimpan.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,6 +161,7 @@ public class MobilView extends javax.swing.JPanel {
                 btnSimpanActionPerformed(evt);
             }
         });
+        add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 350, -1, -1));
 
         btnUpdate.setBackground(new java.awt.Color(0, 0, 0));
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,107 +171,27 @@ public class MobilView extends javax.swing.JPanel {
                 btnUpdateActionPerformed(evt);
             }
         });
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 350, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tipe");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Data Mobil");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 920, -1));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Harga");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 260, -1, -1));
+        add(txtHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 260, 223, -1));
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Nopol");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel5))
-                        .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIdMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMerek, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTipe, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTahun, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNopol, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(btnReset)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnDelete)
-                        .addGap(12, 12, 12)
-                        .addComponent(btnUpdate)
-                        .addGap(2, 2, 2)
-                        .addComponent(btnSimpan))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel7)
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtIdMobil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(txtMerek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(txtTipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(txtTahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(txtNopol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jLabel6)
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel1)
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel2)
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel4)
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel10)
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel8)
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel5)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnReset)
-                            .addComponent(btnDelete)
-                            .addComponent(btnUpdate)
-                            .addComponent(btnSimpan)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 220, -1, -1));
+        add(txtNopol, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 220, 223, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed

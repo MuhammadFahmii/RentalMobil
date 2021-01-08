@@ -16,11 +16,11 @@ import java.util.List;
  *
  * @author Heinz
  */
-public interface TransaksiDao {
-    public void insertTransaksi(TransaksiModel transaksi) throws SQLException;
+public interface TransaksiDao{
+    public void insertTransaksi(TransaksiModel transaksi, int idMobil) throws SQLException;
     public void updateTransaksi(TransaksiModel transaksi) throws SQLException;
-    public void deleteTransaksi(int id_transaksi) throws SQLException;
+    public void deleteTransaksi(int id_transaksi, int idMobil) throws SQLException;
     public List<TransaksiModel> getAllTransaksi();
-    public ResultSet getNopol();
-    public ResultSet querySelectKolom(String namaKolom, String namaTable, String kondisi, String value) throws SQLException;
+    public ResultSet querySelect(String namaTable);
+    public ResultSet querySelect(String namaKolom, String namaTable, String kondisi, String value) throws SQLException;
 }

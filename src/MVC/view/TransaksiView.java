@@ -69,9 +69,17 @@ public class TransaksiView extends javax.swing.JPanel {
     public JComboBox<String> getCmbNoPol() {
         return cmbNoPol;
     }
-    
-    
 
+    public JTextField getTxtMerek() {
+        return txtMerek;
+    }
+
+    public JTextField getTxtTipe() {
+        return txtTipe;
+    }
+    
+    
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -86,7 +94,7 @@ public class TransaksiView extends javax.swing.JPanel {
         btnSimpan = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
-        btnHapus = new javax.swing.JButton();
+        btnKembalikan = new javax.swing.JButton();
         hitungPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         tglPinjam = new com.toedter.calendar.JDateChooser();
@@ -108,6 +116,10 @@ public class TransaksiView extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtHarga = new javax.swing.JTextField();
         txtPeminjam = new javax.swing.JTextField();
+        txtMerek = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtTipe = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(102, 102, 255));
         setPreferredSize(new java.awt.Dimension(1050, 404));
@@ -159,27 +171,27 @@ public class TransaksiView extends javax.swing.JPanel {
             }
         });
 
-        btnHapus.setText("Hapus");
-        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+        btnKembalikan.setText("Kembalikan");
+        btnKembalikan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHapusActionPerformed(evt);
+                btnKembalikanActionPerformed(evt);
             }
         });
 
         hitungPanel.setBackground(new java.awt.Color(255, 153, 153));
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Tgl_Pinjam");
 
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Tgl_Kembali");
 
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Lama");
 
         txtLama.setEditable(false);
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Total");
 
         txtTotal.setEditable(false);
@@ -239,10 +251,13 @@ public class TransaksiView extends javax.swing.JPanel {
 
         panelUtama.setBackground(new java.awt.Color(102, 255, 153));
 
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Id_Transaksi");
 
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Id_mobil");
 
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("No Polisi");
 
         cmbNoPol.addActionListener(new java.awt.event.ActionListener() {
@@ -255,17 +270,25 @@ public class TransaksiView extends javax.swing.JPanel {
 
         txtIdTransaksi.setEditable(false);
 
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Peminjam");
 
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Harga");
 
         txtHarga.setEditable(false);
+
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Merek");
+
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Tipe");
 
         javax.swing.GroupLayout panelUtamaLayout = new javax.swing.GroupLayout(panelUtama);
         panelUtama.setLayout(panelUtamaLayout);
         panelUtamaLayout.setHorizontalGroup(
             panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelUtamaLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUtamaLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -283,11 +306,18 @@ public class TransaksiView extends javax.swing.JPanel {
                 .addGap(104, 104, 104)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelUtamaLayout.createSequentialGroup()
+                        .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtHarga, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addComponent(txtPeminjam))
+                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtHarga)
+                    .addComponent(txtMerek, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPeminjam, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(txtTipe))
                 .addGap(25, 25, 25))
         );
         panelUtamaLayout.setVerticalGroup(
@@ -302,13 +332,19 @@ public class TransaksiView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIdMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMerek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbNoPol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11)
+                    .addComponent(txtTipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -332,8 +368,8 @@ public class TransaksiView extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnHapus)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(btnKembalikan)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,7 +383,7 @@ public class TransaksiView extends javax.swing.JPanel {
                     .addComponent(btnUpdate)
                     .addComponent(btnReset)
                     .addComponent(btnSimpan)
-                    .addComponent(btnHapus))
+                    .addComponent(btnKembalikan))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -365,12 +401,12 @@ public class TransaksiView extends javax.swing.JPanel {
         controller.fillFieldByTable(tblTransaksi.getSelectedRow());
     }//GEN-LAST:event_tblTransaksiMouseClicked
 
-    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+    private void btnKembalikanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembalikanActionPerformed
         // TODO add your handling code here:
         controller.deleteTransaksi();
         controller.getAllTransaksi();
         controller.reset();
-    }//GEN-LAST:event_btnHapusActionPerformed
+    }//GEN-LAST:event_btnKembalikanActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
@@ -401,14 +437,16 @@ public class TransaksiView extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnHitung;
+    private javax.swing.JButton btnKembalikan;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbNoPol;
     private javax.swing.JPanel hitungPanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -426,7 +464,9 @@ public class TransaksiView extends javax.swing.JPanel {
     private javax.swing.JTextField txtIdMobil;
     private javax.swing.JTextField txtIdTransaksi;
     private javax.swing.JTextField txtLama;
+    private javax.swing.JTextField txtMerek;
     private javax.swing.JTextField txtPeminjam;
+    private javax.swing.JTextField txtTipe;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

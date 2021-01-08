@@ -11,6 +11,7 @@ import MVC.model.transaksi.TableTransaksiModel;
 import MVC.service.TransaksiDao;
 import MVC.view.TransaksiView;
 import java.awt.HeadlessException;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -27,24 +28,36 @@ import javax.swing.JOptionPane;
 public class TransaksiController {
     private final TransaksiModel model;
     private final TransaksiView view;
-    private final TransaksiDao dao;
-    private List<TransaksiModel> list;
+    // untuk konversi waktu ke Format (yyyy-MM-dd);
     private final SimpleDateFormat sdf;
+    private TransaksiDao dao = null;
+    private List<TransaksiModel> list;
+    
     
     public TransaksiController(TransaksiView view){
         this.sdf = new SimpleDateFormat("yyyy-MM-dd");
         this.model = new TransaksiModel();
         this.view = view;
-        this.dao = new TransaksiDaoImpl();
-        this.list = dao.getAllTransaksi();
+        try {
+            this.dao = new TransaksiDaoImpl();
+            this.list = dao.getAllTransaksi();
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(TransaksiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
+    /**
+     * Untuk mengambil semua data transaksi pada tabel
+     */
     public void getAllTransaksi(){
         list = dao.getAllTransaksi();
         TableTransaksiModel tableModel = new TableTransaksiModel(list);
         view.getTblTransaksi().setModel(tableModel);
     }
     
+    /**
+     Untuk insertTransaksi ke table transaksi sekaligus update status table mobil
+     */
     public void insertTransaksi(){
         if(view.getTxtIdMobil().getText().isEmpty() || view.getTxtHarga().getText().isEmpty()) {
             JOptionPane.showMessageDialog(view, "Pastikan semua data terisi");
@@ -58,7 +71,7 @@ public class TransaksiController {
         model.setTotal(view.getTxtTotal().getText());
         
         try {
-            dao.insertTransaksi(model);
+            dao.insertTransaksi(model, Integer.parseInt(view.getTxtIdMobil().getText()));
             JOptionPane.showMessageDialog(view, "Data Berhasil Ditambah");
         } catch (SQLException ex) {
             Logger.getLogger(TransaksiController.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,11 +95,19 @@ public class TransaksiController {
         }
     }
     
+    /**
+     * Untuk delete data transaksi ke table transaksi sekaligus update status table mobil
+     */
     public void deleteTransaksi(){
         try {
-            if(view.getTxtIdTransaksi().getText().isEmpty()) JOptionPane.showMessageDialog(view, "Anda Belum Memilih Data");
+            if(view.getTxtIdTransaksi().getText().isEmpty()) {
+                JOptionPane.showMessageDialog(view, "Silahkan pilih mobil terlebih dahulu", "Gagal", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int idTransaksi = Integer.parseInt(view.getTxtIdTransaksi().getText());
+            int idMobil = Integer.parseInt(view.getTxtIdMobil().getText());
             if( JOptionPane.showConfirmDialog(view, "Apakah Anda Yakin?") == JOptionPane.OK_OPTION){
-                dao.deleteTransaksi(Integer.parseInt(view.getTxtIdTransaksi().getText()));
+                dao.deleteTransaksi(idTransaksi, idMobil);
                 JOptionPane.showMessageDialog(view, "Data Berhasil Dihapus");    
             }
         } catch (SQLException ex) {
@@ -94,6 +115,9 @@ public class TransaksiController {
         }
     }
     
+    /**
+     * Untuk reset textfield
+     */
     public void reset(){
         view.getTxtIdTransaksi().setText("");
         view.getTxtIdMobil().setText("");
@@ -105,8 +129,11 @@ public class TransaksiController {
         view.getTxtTotal().setText("");
     }
     
+    /**
+     * Untuk mendapatkan no polisi pada table mobil
+     */
     public void getNopol(){
-        ResultSet rs = dao.getNopol();
+        ResultSet rs = dao.querySelect("tb_mobil");
         try {
             while(rs.next()){
                 view.getCmbNoPol().addItem(rs.getString("nopol"));
@@ -116,19 +143,29 @@ public class TransaksiController {
         }
     }
     
+    /**
+     * Untuk isi text field ketika nopol combo box ditekan
+     * @param nopol 
+     */
     public void fillField(String nopol){
         ResultSet rs = null;
         try {
-            rs = dao.querySelectKolom("id_mobil, harga", "tb_mobil", "nopol", nopol);
+            rs = dao.querySelect("id_mobil, harga, tipe, merek", "tb_mobil", "nopol", nopol);
             while(rs.next()){
                 view.getTxtIdMobil().setText(String.valueOf(rs.getInt("id_mobil")));
                 view.getTxtHarga().setText(rs.getString("harga"));
+                view.getTxtMerek().setText(rs.getString("merek"));
+                view.getTxtTipe().setText(rs.getString("tipe"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(TransaksiController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    /**
+     * Untuk mengisi textField ketika table ditekan
+     * @param row 
+     */
     public void fillFieldByTable(int row){
         ResultSet rs = null;
         view.getTxtIdTransaksi().setText(String.valueOf(list.get(row).getIdTransaksi()));
@@ -137,8 +174,10 @@ public class TransaksiController {
         view.getTxtHarga().setText(String.valueOf(list.get(row).getHarga()));
         view.getTxtLama().setText(String.valueOf(list.get(row).getLama()));
         view.getTxtTotal().setText(String.valueOf(list.get(row).getTotal()));
+        view.getTxtIdMobil().setEditable(false);
+        view.getCmbNoPol().setEditable(false);
         try {
-            rs = dao.querySelectKolom("nopol", "tb_mobil", "id_mobil", String.valueOf(list.get(row).getIdMobil()));
+            rs = dao.querySelect("nopol", "tb_mobil", "id_mobil", String.valueOf(list.get(row).getIdMobil()));
             while(rs.next()){
                 view.getCmbNoPol().setSelectedItem(rs.getString("nopol"));
             }
@@ -148,6 +187,4 @@ public class TransaksiController {
             Logger.getLogger(TransaksiController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
 }
