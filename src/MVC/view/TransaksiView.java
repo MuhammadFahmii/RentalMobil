@@ -9,8 +9,6 @@ import MVC.controller.TransaksiController;
 import com.toedter.calendar.JDateChooser;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -455,14 +453,7 @@ public class TransaksiView extends javax.swing.JPanel {
 
     private void btnHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungActionPerformed
         // TODO add your handling code here:
-        Long tgl_pinjam = getTglPinjam().getDate().getTime();
-        Long tgl_kembali = getTglKembali().getDate().getTime();
-        // Convert timestamp menjadi satuan hari
-        int selisih = (int) ((tgl_kembali - tgl_pinjam) / (24*60*60*1000));
-        
-        int total = selisih * (Integer.parseInt(getTxtHarga().getText()));
-        getTxtLama().setText(String.valueOf(selisih));
-        getTxtTotal().setText(String.valueOf(total));
+        controller.updateHitung();
     }//GEN-LAST:event_btnHitungActionPerformed
 
 

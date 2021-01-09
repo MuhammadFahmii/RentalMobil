@@ -26,7 +26,8 @@ public class RentalMobil {
             JOptionPane.showMessageDialog(main, "Database Tidak Ditemukan");
             System.exit(0);
         } catch (IOException ex) {
-            Logger.getLogger(RentalMobil.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(main, "Path konfigurasi database tidak ditemukan");
+            System.exit(0);
         }
     }
 }

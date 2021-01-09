@@ -27,6 +27,8 @@ public final class MainView extends javax.swing.JFrame {
     public MainView() throws SQLException, IOException {
         initComponents();
         berandaView = new BerandaView();
+        mobilView = new MobilView();
+        transaksiView = new TransaksiView();
         contentPanel.add(berandaView);
     }
     

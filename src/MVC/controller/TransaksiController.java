@@ -217,4 +217,15 @@ public class TransaksiController {
             Logger.getLogger(TransaksiController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void updateHitung(){
+        Long tgl_pinjam = view.getTglPinjam().getDate().getTime();
+        Long tgl_kembali = view.getTglKembali().getDate().getTime();
+        // Convert timestamp menjadi satuan hari
+        int selisih = (int) ((tgl_kembali - tgl_pinjam) / (24*60*60*1000));
+        
+        int total = selisih * (Integer.parseInt(view.getTxtHarga().getText()));
+        view.getTxtLama().setText(String.valueOf(selisih));
+        view.getTxtTotal().setText(String.valueOf(total));
+    }
 }

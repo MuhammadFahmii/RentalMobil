@@ -30,7 +30,7 @@ public class koneksiDB {
      */
     
     //method konek ke database
-    public static Connection getConnection() throws SQLException, FileNotFoundException, IOException{
+    public static Connection getConnection() throws SQLException, IOException{
         //cek koneksi
         if(conn == null){
             propert.load(new FileInputStream("C:\\Users\\Heinz\\Documents\\NetBeansProjects\\RentalMobil\\src\\MVC\\db\\konfigDB.properties"));
