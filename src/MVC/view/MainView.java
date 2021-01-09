@@ -73,7 +73,7 @@ public final class MainView extends javax.swing.JFrame {
             }
         });
 
-        btnTransaksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MVC/image/car-icon.png"))); // NOI18N
+        btnTransaksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MVC/image/Partnership-icon.png"))); // NOI18N
         btnTransaksi.setText("Data Transaksi");
         btnTransaksi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

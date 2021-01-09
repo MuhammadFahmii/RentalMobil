@@ -149,7 +149,7 @@
             <Component class="javax.swing.JButton" name="btnTransaksi">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/MVC/image/car-icon.png"/>
+                  <Image iconType="3" name="/MVC/image/Partnership-icon.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Data Transaksi"/>
               </Properties>
