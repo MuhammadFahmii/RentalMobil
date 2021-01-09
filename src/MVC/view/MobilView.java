@@ -8,7 +8,7 @@ package MVC.view;
 import MVC.controller.MobilController;
 import java.io.IOException;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -51,8 +51,8 @@ public class MobilView extends javax.swing.JPanel {
         return txtNopol;
     }
 
-    public JTextField getTxtStatus() {
-        return txtStatus;
+    public JComboBox<String> getCmbStatus() {
+        return cmbStatus;
     }
 
     public JTextField getTxtTahun() {
@@ -77,7 +77,6 @@ public class MobilView extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtMerek = new javax.swing.JTextField();
         txtTipe = new javax.swing.JTextField();
-        txtStatus = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblMobil = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -94,6 +93,7 @@ public class MobilView extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         txtNopol = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        cmbStatus = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(204, 255, 204));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -125,7 +125,6 @@ public class MobilView extends javax.swing.JPanel {
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 390, -1, -1));
         add(txtMerek, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 190, 223, -1));
         add(txtTipe, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 230, 223, -1));
-        add(txtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 223, -1));
 
         tblMobil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -204,6 +203,10 @@ public class MobilView extends javax.swing.JPanel {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MVC/image/Travel-BMV-icon.png"))); // NOI18N
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, -1, -1));
+
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tersedia", "Keluar" }));
+        cmbStatus.setSelectedIndex(-1);
+        add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 220, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
@@ -220,16 +223,18 @@ public class MobilView extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        controller.updateMobil(this);    
-        controller.getAllMobil();
-        controller.reset();
+        if(controller.updateMobil(this) == true){
+            controller.getAllMobil();
+            controller.reset();            
+        }  
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
-        controller.insertMobil(this);
-        controller.getAllMobil();
-        controller.reset();
+        if(controller.insertMobil(this) == true){
+            controller.getAllMobil();
+            controller.reset();            
+        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void tblMobilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMobilMouseClicked
@@ -243,6 +248,7 @@ public class MobilView extends javax.swing.JPanel {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -258,7 +264,6 @@ public class MobilView extends javax.swing.JPanel {
     private javax.swing.JTextField txtIdMobil;
     private javax.swing.JTextField txtMerek;
     private javax.swing.JTextField txtNopol;
-    private javax.swing.JTextField txtStatus;
     private javax.swing.JTextField txtTahun;
     private javax.swing.JTextField txtTipe;
     // End of variables declaration//GEN-END:variables

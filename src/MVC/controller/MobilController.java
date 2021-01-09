@@ -47,16 +47,23 @@ public class MobilController {
         view.getTxtTahun().setText(list.get(row).getTahun().toString());
         view.getTxtNopol().setText(list.get(row).getNopol());
         view.getTxtHarga().setText(list.get(row).getHarga().toString());
-        view.getTxtStatus().setText(list.get(row).getStatus());
+        view.getCmbStatus().setSelectedItem(list.get(row).getStatus());
     }
     
-    public void insertMobil(MobilView view) {
+    public boolean insertMobil(MobilView view) {
+        // Validasi
+        if (view.getTxtMerek().getText().isEmpty() || view.getTxtNopol().getText().isEmpty()
+                || view.getTxtTahun().getText().isEmpty() || view.getTxtTipe().getText().isEmpty()
+                || view.getTxtHarga().getText().isEmpty() || view.getCmbStatus().getSelectedIndex()==-1) {
+            JOptionPane.showMessageDialog(view, "Pastikan data sudah terisi semua", "Failed", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         String merek = view.getTxtMerek().getText();
         String tipe = view.getTxtTipe().getText();
         int tahun = Integer.parseInt(view.getTxtTahun().getText());
         String nopol = view.getTxtNopol().getText();
         int harga = Integer.parseInt(view.getTxtHarga().getText());
-        String status = view.getTxtStatus().getText();
+        String status = view.getCmbStatus().getSelectedItem().toString();
 
         model.setMerek(merek);
         model.setTipe(tipe);
@@ -68,17 +75,18 @@ public class MobilController {
         try {
             dao.insertMobil(model);
             JOptionPane.showMessageDialog(view, "Mobil Berhasil Ditambahkan");
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(TransaksiController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 
-    public void updateMobil(MobilView view) {
-
-        //jika tidak ada yang diseleksi kasih peringatan
-        if (view.getTblMobil().getSelectedRowCount() == 0) {
-            JOptionPane.showMessageDialog(view, "Silahkan Seleksi baris data yang akan diubah");
-            return;
+    public boolean updateMobil(MobilView view) {
+        // Validasi
+        if (view.getTblMobil().getSelectedRowCount() == 0 || view.getTxtIdMobil().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(view, "Silahkan pilih mobil yang akan diubah", "Failed", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
 
         String merek = view.getTxtMerek().getText();
@@ -86,7 +94,7 @@ public class MobilController {
         int tahun = Integer.parseInt(view.getTxtTahun().getText());
         String nopol = view.getTxtNopol().getText();
         int harga = Integer.parseInt(view.getTxtHarga().getText());
-        String status = view.getTxtStatus().getText();
+        String status = view.getCmbStatus().getSelectedItem().toString();
         int idMobil = Integer.parseInt(view.getTxtIdMobil().getText());
 
         model.setId_mobil(idMobil);
@@ -99,16 +107,18 @@ public class MobilController {
         try {
             dao.updateMobil(model);
             JOptionPane.showMessageDialog(view, "Data Mobil Berhasil Di Ubah");
+            return true;
         } catch (SQLException ex) {
-            Logger.getLogger(TransaksiController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(view, "Data Mobil Gagal Di Ubah");
+            return false;
         }
         
     }
     
     public void deleteMobil(MobilView view) {
-        //jika tidak ada yang diseleksi kasih peringatan
+        // Validasi
         if (view.getTblMobil().getSelectedRowCount() == 0) {
-            JOptionPane.showMessageDialog(view, "Silahkan Seleksi baris data yang akan dihapus");
+            JOptionPane.showMessageDialog(view, "Silahkan pilih mobil yang akan diubah", "Failed", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -134,6 +144,6 @@ public class MobilController {
         view.getTxtTahun().setText("");
         view.getTxtNopol().setText("");
         view.getTxtHarga().setText("");
-        view.getTxtStatus().setText("");
+        view.getCmbStatus().setSelectedIndex(-1);
     }
 }
