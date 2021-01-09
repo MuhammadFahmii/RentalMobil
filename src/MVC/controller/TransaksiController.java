@@ -227,7 +227,6 @@ public class TransaksiController {
         }
         Long tgl_pinjam = view.getTglPinjam().getDate().getTime();
         Long tgl_kembali = view.getTglKembali().getDate().getTime();
-        System.out.println(tgl_pinjam);
         // Convert timestamp menjadi satuan hari
         int selisih = (int) ((tgl_kembali - tgl_pinjam) / (24*60*60*1000));
         

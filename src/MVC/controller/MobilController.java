@@ -48,6 +48,7 @@ public class MobilController {
         view.getTxtNopol().setText(list.get(row).getNopol());
         view.getTxtHarga().setText(list.get(row).getHarga().toString());
         view.getCmbStatus().setSelectedItem(list.get(row).getStatus());
+        view.getCmbStatus().setEnabled(false);
     }
     
     public boolean insertMobil(MobilView view) {
@@ -56,6 +57,10 @@ public class MobilController {
                 || view.getTxtTahun().getText().isEmpty() || view.getTxtTipe().getText().isEmpty()
                 || view.getTxtHarga().getText().isEmpty() || view.getCmbStatus().getSelectedIndex()==-1) {
             JOptionPane.showMessageDialog(view, "Pastikan data sudah terisi semua", "Failed", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if(!view.getTxtIdMobil().getText().isEmpty()){
+            JOptionPane.showMessageDialog(view, "Data Mobil Sudah Ada", "Failed", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         String merek = view.getTxtMerek().getText();

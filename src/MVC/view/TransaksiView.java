@@ -102,8 +102,8 @@ public class TransaksiView extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTransaksi = new javax.swing.JTable();
-        btnSimpan = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
+        btnPinjam = new javax.swing.JButton();
+        btnUbah = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
         btnKembalikan = new javax.swing.JButton();
         hitungPanel = new javax.swing.JPanel();
@@ -186,17 +186,17 @@ public class TransaksiView extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblTransaksi);
 
-        btnSimpan.setText("Simpan");
-        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+        btnPinjam.setText("Pinjam");
+        btnPinjam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSimpanActionPerformed(evt);
+                btnPinjamActionPerformed(evt);
             }
         });
 
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+        btnUbah.setText("Ubah");
+        btnUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
+                btnUbahActionPerformed(evt);
             }
         });
 
@@ -423,9 +423,9 @@ public class TransaksiView extends javax.swing.JPanel {
                         .addComponent(hitungPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(354, 354, 354)
-                        .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
@@ -446,8 +446,8 @@ public class TransaksiView extends javax.swing.JPanel {
                     .addComponent(hitungPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSimpan)
-                    .addComponent(btnUpdate)
+                    .addComponent(btnPinjam)
+                    .addComponent(btnUbah)
                     .addComponent(btnReset)
                     .addComponent(btnKembalikan))
                 .addGap(12, 12, 12)
@@ -457,13 +457,13 @@ public class TransaksiView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+    private void btnPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPinjamActionPerformed
         // TODO add your handling code here:
         if(controller.insertTransaksi() == true){
             controller.getAllTransaksi();
             controller.reset();            
         }
-    }//GEN-LAST:event_btnSimpanActionPerformed
+    }//GEN-LAST:event_btnPinjamActionPerformed
 
     private void tblTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTransaksiMouseClicked
         // TODO add your handling code here:
@@ -482,12 +482,12 @@ public class TransaksiView extends javax.swing.JPanel {
         controller.reset();
     }//GEN-LAST:event_btnResetActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
         // TODO add your handling code here:
         controller.updateTransaksi();
         controller.getAllTransaksi();
         controller.reset();
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_btnUbahActionPerformed
 
     private void cmbNoPolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNoPolActionPerformed
         // Jika combobox kosong maka tidak akan mengisi txt field lainnya
@@ -505,9 +505,9 @@ public class TransaksiView extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHitung;
     private javax.swing.JButton btnKembalikan;
+    private javax.swing.JButton btnPinjam;
     private javax.swing.JButton btnReset;
-    private javax.swing.JButton btnSimpan;
-    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnUbah;
     private javax.swing.JComboBox<String> cmbNoPol;
     private javax.swing.JPanel hitungPanel;
     private javax.swing.JLabel jLabel1;
