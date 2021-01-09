@@ -220,8 +220,14 @@ public class TransaksiController {
     }
     
     public void updateHitung(){
+        // Jika field tanggal kosong
+        if(view.getTglPinjam().getCalendar()==null || view.getTglKembali().getCalendar()==null){
+            JOptionPane.showMessageDialog(view, "Tanggal masih kosong!", "Failed", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Long tgl_pinjam = view.getTglPinjam().getDate().getTime();
         Long tgl_kembali = view.getTglKembali().getDate().getTime();
+        System.out.println(tgl_pinjam);
         // Convert timestamp menjadi satuan hari
         int selisih = (int) ((tgl_kembali - tgl_pinjam) / (24*60*60*1000));
         

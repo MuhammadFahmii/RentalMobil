@@ -5,6 +5,8 @@
  */
 package MVC.model.mobil;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -15,9 +17,26 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableMobilModel extends AbstractTableModel{
     private List<MobilModel> list = new ArrayList<>();
+    private final DecimalFormat kurs;
+    private final DecimalFormatSymbols rp;
 
     public TableMobilModel(List<MobilModel> list) {
+        kurs = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        rp = DecimalFormatSymbols.getInstance();
         this.list = list;
+    }
+    
+    /**
+     * Untuk konversi mata uang ke RUPIAH
+     * @param biaya
+     * @return 
+     */
+    private String kurs(int biaya){
+        rp.setCurrencySymbol("Rp. ");
+        rp.setGroupingSeparator('.');
+        rp.setMonetaryDecimalSeparator(',');
+        kurs.setDecimalFormatSymbols(rp);
+        return kurs.format(biaya);
     }
     
     @Override
@@ -66,7 +85,7 @@ public class TableMobilModel extends AbstractTableModel{
             case 4:
                 return list.get(rowIndex).getNopol();
             case 5:
-                return list.get(rowIndex).getHarga();
+                return kurs(list.get(rowIndex).getHarga());
             case 6:
                 return list.get(rowIndex).getStatus();
             default:

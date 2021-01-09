@@ -108,7 +108,7 @@ public class MobilView extends javax.swing.JPanel {
                 btnResetActionPerformed(evt);
             }
         });
-        add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 440, -1, -1));
+        add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, -1, -1));
 
         btnDelete.setBackground(new java.awt.Color(0, 0, 0));
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,13 +118,13 @@ public class MobilView extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, -1, -1));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, -1, -1));
 
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Status");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 390, -1, -1));
-        add(txtMerek, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 190, 223, -1));
-        add(txtTipe, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 230, 223, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, -1, -1));
+        add(txtMerek, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 223, -1));
+        add(txtTipe, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 223, -1));
 
         tblMobil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,24 +142,24 @@ public class MobilView extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblMobil);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 610, 420));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1040, 220));
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Tahun");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
 
         txtIdMobil.setEditable(false);
         txtIdMobil.setEnabled(false);
-        add(txtIdMobil, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 150, 223, -1));
-        add(txtTahun, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 270, 223, -1));
+        add(txtIdMobil, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 223, -1));
+        add(txtTahun, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 223, -1));
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Merek");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Id_Mobil");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
         btnSimpan.setBackground(new java.awt.Color(0, 0, 0));
         btnSimpan.setForeground(new java.awt.Color(255, 255, 255));
@@ -169,7 +169,7 @@ public class MobilView extends javax.swing.JPanel {
                 btnSimpanActionPerformed(evt);
             }
         });
-        add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 440, -1, -1));
+        add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, -1, -1));
 
         btnUpdate.setBackground(new java.awt.Color(0, 0, 0));
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
@@ -179,11 +179,11 @@ public class MobilView extends javax.swing.JPanel {
                 btnUpdateActionPerformed(evt);
             }
         });
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 440, -1, -1));
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Tipe");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 230, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -193,20 +193,20 @@ public class MobilView extends javax.swing.JPanel {
 
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Harga");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 350, -1, -1));
-        add(txtHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 350, 223, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
+        add(txtHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 223, -1));
 
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Nopol");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 310, -1, -1));
-        add(txtNopol, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 310, 223, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, -1, -1));
+        add(txtNopol, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 223, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MVC/image/Travel-BMV-icon.png"))); // NOI18N
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, -1, -1));
 
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tersedia", "Keluar" }));
         cmbStatus.setSelectedIndex(-1);
-        add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 220, -1));
+        add(cmbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 220, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed

@@ -5,6 +5,8 @@
  */
 package MVC.model.transaksi;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -15,9 +17,26 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableTransaksiModel extends AbstractTableModel{
     private List<TransaksiModel> list = new ArrayList<>();
+    private final DecimalFormat kurs;
+    private final DecimalFormatSymbols rp;
     
     public TableTransaksiModel(List<TransaksiModel> list){
         this.list = list;
+        kurs = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        rp = DecimalFormatSymbols.getInstance();
+    }
+    
+    /**
+     * Untuk konversi mata uang ke RUPIAH
+     * @param biaya
+     * @return 
+     */
+    private String kurs(int biaya){
+        rp.setCurrencySymbol("Rp. ");
+        rp.setGroupingSeparator('.');
+        rp.setMonetaryDecimalSeparator(',');
+        kurs.setDecimalFormatSymbols(rp);
+        return kurs.format(biaya);
     }
     
     @Override
@@ -64,7 +83,7 @@ public class TableTransaksiModel extends AbstractTableModel{
             case 2:
                 return list.get(rowIndex).getPeminjam();
             case 3:
-                return list.get(rowIndex).getHarga();
+                return kurs(list.get(rowIndex).getHarga());
             case 4:
                 return list.get(rowIndex).getTgl_pinjaman();
             case 5:
