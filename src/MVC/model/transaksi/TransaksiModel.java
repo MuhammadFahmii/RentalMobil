@@ -10,8 +10,8 @@ package MVC.model.transaksi;
  * @author Heinz
  */
 public class TransaksiModel {
-    private int idTransaksi, idMobil;
-    private String peminjam, harga, tgl_pinjaman, tgl_kembali, lama, total;
+    private int idTransaksi, idMobil, harga;
+    private String peminjam, tgl_pinjaman, tgl_kembali, lama, total;
     
     public int getIdTransaksi() {
         return idTransaksi;
@@ -37,11 +37,11 @@ public class TransaksiModel {
         this.peminjam = peminjam;
     }
 
-    public String getHarga() {
+    public int getHarga() {
         return harga;
     }
 
-    public void setHarga(String harga) {
+    public void setHarga(int harga) {
         this.harga = harga;
     }
 

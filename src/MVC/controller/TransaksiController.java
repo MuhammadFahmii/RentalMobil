@@ -72,7 +72,7 @@ public class TransaksiController {
         }
         this.setAtributeModel("insert");
         try {
-            dao.insertTransaksi(model, Integer.parseInt(view.getTxtIdMobil().getText()));
+            dao.insertTransaksi(model);
             JOptionPane.showMessageDialog(view, "Data Mobil Berhasil Ditambah");
             return true;
         } catch (SQLException ex) {
@@ -95,7 +95,7 @@ public class TransaksiController {
             dao.updateTransaksi(model);
             JOptionPane.showMessageDialog(view, "Data Berhasil Diubah");
         } catch (HeadlessException | SQLException ex) {
-            Logger.getLogger(TransaksiController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(view, "Data mobil gagal diubah");
         }
     }
     
@@ -106,7 +106,7 @@ public class TransaksiController {
     private void setAtributeModel(String method){
         model.setIdMobil(Integer.parseInt(view.getTxtIdMobil().getText()));
         model.setPeminjam(view.getTxtNamaPeminjam().getText());
-        model.setHarga(view.getTxtHarga().getText());
+        model.setHarga(Integer.parseInt(view.getTxtHarga().getText()));
         model.setTgl_pinjaman(sdf.format(view.getTglPinjam().getDate()));
         model.setTgl_kembali(sdf.format(view.getTglKembali().getDate()));
         model.setLama(view.getTxtLama().getText());
@@ -124,10 +124,10 @@ public class TransaksiController {
             return;
         }
         try {
-            int idTransaksi = Integer.parseInt(view.getTxtIdTransaksi().getText());
-            int idMobil = Integer.parseInt(view.getTxtIdMobil().getText());
+            model.setIdMobil(Integer.parseInt(view.getTxtIdMobil().getText()));
+            model.setHarga(Integer.parseInt(view.getTxtIdTransaksi().getText()));
             if( JOptionPane.showConfirmDialog(view, "Apakah Anda Yakin?") == JOptionPane.OK_OPTION){
-                dao.deleteTransaksi(idTransaksi, idMobil);
+                dao.deleteTransaksi(model);
                 JOptionPane.showMessageDialog(view, "Data Mobil Berhasil Dikembalikan", "Success", JOptionPane.INFORMATION_MESSAGE);    
             }
         } catch (SQLException ex) {
