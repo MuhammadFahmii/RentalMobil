@@ -27,16 +27,13 @@ import java.util.logging.Logger;
  * @author Heinz
  */
 public class TransaksiDaoImpl implements TransaksiDao{
-    private Connection conn = null;
-    private final String updateTransaksi = "UPDATE tb_transaksi SET id_mobil=?, peminjam=?, harga=?, tgl_pinjaman=?, tgl_kembali=?, lama=?, total=? WHERE id_transaksi=?";
-    private final String deleteTransaksi = "DELETE FROM tb_transaksi WHERE id_transaksi = ?";
-    
+    private Connection conn = null;    
 
     public TransaksiDaoImpl() throws SQLException, IOException{
        this.conn = koneksiDB.getConnection();
     }
        
-    /*
+    /**
      * Query untuk insert data ke table Transaksi
      */
     @Override
@@ -72,9 +69,10 @@ public class TransaksiDaoImpl implements TransaksiDao{
      */
     @Override
     public void updateTransaksi(TransaksiModel transaksi) throws SQLException {
+        String SQL = "UPDATE tb_transaksi SET id_mobil=?, peminjam=?, harga=?, tgl_pinjaman=?, tgl_kembali=?, lama=?, total=? WHERE id_transaksi=?";
         PreparedStatement stmt = null;
         try {
-            stmt = conn.prepareStatement(updateTransaksi);
+            stmt = conn.prepareStatement(SQL);
             stmt.setInt(1, transaksi.getIdMobil());
             stmt.setString(2, transaksi.getPeminjam());
             stmt.setString(3, transaksi.getHarga());
@@ -97,9 +95,11 @@ public class TransaksiDaoImpl implements TransaksiDao{
      */
     @Override
     public void deleteTransaksi(int id_transaksi, int idMobil) throws SQLException{
+        String SQL = "DELETE FROM tb_transaksi WHERE id_transaksi = ?";
+
         PreparedStatement stmt1 = null;
         try {
-            stmt1 = conn.prepareStatement(deleteTransaksi);
+            stmt1 = conn.prepareStatement(SQL);
             stmt1.setInt(1, id_transaksi);
             stmt1.executeUpdate();
             this.updateStatus(idMobil, "Tersedia");
