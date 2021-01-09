@@ -130,7 +130,7 @@ public final class MainView extends javax.swing.JFrame {
                     .addContainerGap()
                     .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
                     .addContainerGap()))
         );
 
