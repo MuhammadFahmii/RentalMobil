@@ -22,14 +22,13 @@ public class koneksiDB {
     //inisialisasi fungsi class properties untuk memanggil file konfig database
     private static final Properties propert = new Properties();
     
-    /**
-     * Inisialisasi DataAccessObj
-     * @return 
-     * @throws java.sql.SQLException 
-     * @throws java.io.FileNotFoundException 
-     */
     
-    //method konek ke database
+    /**
+     * Method konek database
+     * @return
+     * @throws SQLException 
+     * @throws java.io.IOException 
+     */
     public static Connection getConnection() throws SQLException, IOException{
         //cek koneksi
         if(conn == null){

@@ -7,6 +7,7 @@ package MVC.view;
 
 import MVC.controller.TransaksiController;
 import com.toedter.calendar.JDateChooser;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
@@ -25,16 +26,13 @@ public class TransaksiView extends javax.swing.JPanel {
      * Creates new form TrasaksiView
      * @throws java.sql.SQLException 
      */
-    public TransaksiView() {
+    public TransaksiView() throws SQLException, IOException {
         initComponents();
-        try {
-            this.controller = new TransaksiController(this);
-            controller.getAllTransaksi();
-            controller.getNopol();
-            controller.reset();
-        } catch (SQLException | IOException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
+        this.controller = new TransaksiController(this);
+        controller.getAllTransaksi();
+        controller.getNopol();
+        controller.reset();
+        
     }
     
    

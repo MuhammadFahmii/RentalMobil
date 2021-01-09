@@ -8,8 +8,6 @@ package MVC.main;
 import MVC.view.MainView;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,11 +21,11 @@ public class RentalMobil {
             main = new MainView();
             main.setVisible(true);
         } catch(SQLException ex){
-            JOptionPane.showMessageDialog(main, "Database Tidak Ditemukan");
+            JOptionPane.showMessageDialog(main, ex.getMessage(), "Database Tidak Ditemukan", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(main, "Path konfigurasi database tidak ditemukan");
+            JOptionPane.showMessageDialog(main, ex.getMessage(), "Path Konfig DB tidak ditemukan", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
-        }
+        } 
     }
 }

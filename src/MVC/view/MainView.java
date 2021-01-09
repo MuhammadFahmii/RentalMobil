@@ -5,7 +5,6 @@
  */
 package MVC.view;
 
-import MVC.controller.MobilController;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -20,11 +19,9 @@ public final class MainView extends javax.swing.JFrame {
     private TransaksiView transaksiView;
     private MobilView mobilView;
     
-    /** Creates new form MainView
-     * @throws java.sql.SQLException 
-     * @throws java.io.IOException 
+    /** Creates new form MainView 
      */
-    public MainView() throws SQLException, IOException {
+    public MainView() throws SQLException, IOException  {
         initComponents();
         berandaView = new BerandaView();
         mobilView = new MobilView();
@@ -144,13 +141,17 @@ public final class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMobilActionPerformed
-        // TODO add your handling code here:
-        mobilView = new MobilView();
-        contentPanel.removeAll();
-        contentPanel.repaint();
-        contentPanel.add(mobilView);
-        contentPanel.repaint();
-        contentPanel.revalidate();
+        try {
+            // TODO add your handling code here:
+            mobilView = new MobilView();
+            contentPanel.removeAll();
+            contentPanel.repaint();
+            contentPanel.add(mobilView);
+            contentPanel.repaint();
+            contentPanel.revalidate();
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnMobilActionPerformed
 
     private void btnBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBerandaActionPerformed
@@ -163,13 +164,17 @@ public final class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBerandaActionPerformed
 
     private void btnTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransaksiActionPerformed
-        // TODO add your handling code here:
-        transaksiView = new TransaksiView();
-        contentPanel.removeAll();
-        contentPanel.repaint();
-        contentPanel.add(transaksiView);
-        contentPanel.repaint();
-        contentPanel.revalidate();
+        try {
+            // TODO add your handling code here:
+            transaksiView = new TransaksiView();
+            contentPanel.removeAll();
+            contentPanel.repaint();
+            contentPanel.add(transaksiView);
+            contentPanel.repaint();
+            contentPanel.revalidate();
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnTransaksiActionPerformed
 
     /**
@@ -205,7 +210,9 @@ public final class MainView extends javax.swing.JFrame {
             public void run() {
                 try {
                     new MainView().setVisible(true);
-                } catch (SQLException | IOException ex) {
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
                     Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

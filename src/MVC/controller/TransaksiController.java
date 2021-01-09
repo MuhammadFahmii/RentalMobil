@@ -11,6 +11,7 @@ import MVC.model.transaksi.TableTransaksiModel;
 import MVC.service.TransaksiDao;
 import MVC.view.TransaksiView;
 import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ public class TransaksiController {
     private List<TransaksiModel> list;
     
     
-    public TransaksiController(TransaksiView view) throws SQLException, IOException{
+    public TransaksiController(TransaksiView view) throws SQLException, IOException, FileNotFoundException{
         // untuk konversi waktu ke Format (yyyy-MM-dd);
         this.sdf = new SimpleDateFormat("yyyy-MM-dd");
         this.model = new TransaksiModel();

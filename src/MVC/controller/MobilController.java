@@ -12,6 +12,7 @@ import MVC.model.transaksi.TableTransaksiModel;
 import MVC.service.MobilDao;
 import MVC.view.MobilView;
 import java.awt.HeadlessException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,7 +29,7 @@ public class MobilController {
     private final MobilDao dao;
     private List<MobilModel> list;
     
-    public MobilController(MobilView view) {
+    public MobilController(MobilView view) throws SQLException, IOException {
         this.model = new MobilModel();
         this.dao = new MobilDaoImpl();
         this.view = view;

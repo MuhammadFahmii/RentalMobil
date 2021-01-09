@@ -6,6 +6,9 @@
 package MVC.view;
 
 import MVC.controller.MobilController;
+import java.io.IOException;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -15,13 +18,17 @@ import javax.swing.JTextField;
  */
 public class MobilView extends javax.swing.JPanel {
     
-    private final MobilController controller;
+    private MobilController controller = null;
     
-    /** Creates new form BarangView */
-    public MobilView() {
+    /** Creates new form BarangView
+     * @throws java.sql.SQLException
+     * @throws java.io.IOException 
+     */
+    public MobilView() throws SQLException, IOException{
         initComponents();
         controller = new MobilController(this);
-        controller.getAllMobil();
+        controller.getAllMobil();        
+        
     }
 
     public JTable getTblMobil() {

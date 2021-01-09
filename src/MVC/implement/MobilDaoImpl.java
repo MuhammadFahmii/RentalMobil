@@ -31,12 +31,8 @@ public class MobilDaoImpl implements MobilDao{
     private final String deleteMobil = "DELETE FROM tb_mobil WHERE id_mobil=?";
     private final String selectAll = "SELECT * FROM tb_mobil";
 
-    public MobilDaoImpl(){
-        try {
-            this.conn = koneksiDB.getConnection();
-        } catch (SQLException | IOException ex) {
-            Logger.getLogger(MobilDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public MobilDaoImpl() throws SQLException, IOException{
+        this.conn = koneksiDB.getConnection();
     }
     
     @Override
