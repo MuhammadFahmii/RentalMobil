@@ -9,10 +9,10 @@ package MVC.view;
  *
  * @author Heinz
  */
-public class HomeView extends javax.swing.JPanel {
+public class BerandaView extends javax.swing.JPanel {
 
     /** Creates new form HomePanel */
-    public HomeView() {
+    public BerandaView() {
         initComponents();
     }
 

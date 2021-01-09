@@ -20,7 +20,7 @@ public interface TransaksiDao{
     public void insertTransaksi(TransaksiModel transaksi, int idMobil) throws SQLException;
     public void updateTransaksi(TransaksiModel transaksi) throws SQLException;
     public void deleteTransaksi(int id_transaksi, int idMobil) throws SQLException;
-    public List<TransaksiModel> getAllTransaksi();
-    public ResultSet querySelect(String namaTable);
+    public List<TransaksiModel> getAllTransaksi() throws SQLException;
+    public ResultSet querySelect(String namaTable) throws SQLException;
     public ResultSet querySelect(String namaKolom, String namaTable, String kondisi, String value) throws SQLException;
 }

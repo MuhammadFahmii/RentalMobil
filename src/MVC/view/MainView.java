@@ -6,6 +6,7 @@
 package MVC.view;
 
 import MVC.controller.MobilController;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,22 +16,18 @@ import java.util.logging.Logger;
  * @author Heinz
  */
 public final class MainView extends javax.swing.JFrame {
-    private final TransaksiView transaksiView;
-    private final HomeView homeView;
-    private final MobilView mobilView;
-    private final MobilController controller;
+    private final BerandaView berandaView;
+    private TransaksiView transaksiView;
+    private MobilView mobilView;
     
     /** Creates new form MainView
      * @throws java.sql.SQLException 
+     * @throws java.io.IOException 
      */
-    public MainView() throws SQLException {
+    public MainView() throws SQLException, IOException {
         initComponents();
-        transaksiView = new TransaksiView();
-        homeView = new HomeView();
-        mobilView = new MobilView();
-        controller = new MobilController(mobilView);
-       
-        contentPanel.add(homeView);
+        berandaView = new BerandaView();
+        contentPanel.add(berandaView);
     }
     
     /** This method is called from within the constructor to
@@ -52,9 +49,11 @@ public final class MainView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Rental Mobil");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(1290, 560));
         setResizable(false);
 
         bodyPanel.setBackground(new java.awt.Color(9, 132, 227));
+        bodyPanel.setPreferredSize(new java.awt.Dimension(1290, 520));
 
         sidePanel.setBackground(new java.awt.Color(255, 234, 167));
         sidePanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
@@ -115,7 +114,7 @@ public final class MainView extends javax.swing.JFrame {
         bodyPanel.setLayout(bodyPanelLayout);
         bodyPanelLayout.setHorizontalGroup(
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1251, Short.MAX_VALUE)
+            .addGap(0, 1290, Short.MAX_VALUE)
             .addGroup(bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(bodyPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -144,7 +143,7 @@ public final class MainView extends javax.swing.JFrame {
 
     private void btnMobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMobilActionPerformed
         // TODO add your handling code here:
-        controller.getAllMobil();
+        mobilView = new MobilView();
         contentPanel.removeAll();
         contentPanel.repaint();
         contentPanel.add(mobilView);
@@ -156,13 +155,14 @@ public final class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
         contentPanel.removeAll();
         contentPanel.repaint();
-        contentPanel.add(homeView);
+        contentPanel.add(berandaView);
         contentPanel.repaint();
         contentPanel.revalidate();
     }//GEN-LAST:event_btnBerandaActionPerformed
 
     private void btnTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransaksiActionPerformed
         // TODO add your handling code here:
+        transaksiView = new TransaksiView();
         contentPanel.removeAll();
         contentPanel.repaint();
         contentPanel.add(transaksiView);
@@ -203,7 +203,7 @@ public final class MainView extends javax.swing.JFrame {
             public void run() {
                 try {
                     new MainView().setVisible(true);
-                } catch (SQLException ex) {
+                } catch (SQLException | IOException ex) {
                     Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

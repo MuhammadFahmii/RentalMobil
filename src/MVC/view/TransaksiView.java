@@ -7,7 +7,12 @@ package MVC.view;
 
 import MVC.controller.TransaksiController;
 import com.toedter.calendar.JDateChooser;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -16,17 +21,22 @@ import javax.swing.JTextField;
  * @author Heinz
  */
 public class TransaksiView extends javax.swing.JPanel {
-    private final TransaksiController controller;
+    private TransaksiController controller = null;
     
     /*
      * Creates new form TrasaksiView
      * @throws java.sql.SQLException 
      */
-    public TransaksiView()  {
+    public TransaksiView() {
         initComponents();
-        this.controller = new TransaksiController(this);
-        controller.getAllTransaksi();
-        controller.getNopol();
+        try {
+            this.controller = new TransaksiController(this);
+            controller.getAllTransaksi();
+            controller.getNopol();
+            controller.reset();
+        } catch (SQLException | IOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
     
    
@@ -58,8 +68,8 @@ public class TransaksiView extends javax.swing.JPanel {
         return txtLama;
     }
 
-    public JTextField getTxtPeminjam() {
-        return txtPeminjam;
+    public JTextField getTxtNamaPeminjam() {
+        return txtNamaPeminjam;
     }
 
     public JTextField getTxtTotal() {
@@ -76,6 +86,10 @@ public class TransaksiView extends javax.swing.JPanel {
 
     public JTextField getTxtTipe() {
         return txtTipe;
+    }
+
+    public JTextField getTxtStatus() {
+        return txtStatus;
     }
     
     
@@ -105,7 +119,7 @@ public class TransaksiView extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         btnHitung = new javax.swing.JButton();
-        panelUtama = new javax.swing.JPanel();
+        transaksiPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -115,14 +129,16 @@ public class TransaksiView extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtHarga = new javax.swing.JTextField();
-        txtPeminjam = new javax.swing.JTextField();
+        txtNamaPeminjam = new javax.swing.JTextField();
         txtMerek = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtTipe = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtStatus = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 102, 255));
-        setPreferredSize(new java.awt.Dimension(1050, 404));
 
         tblTransaksi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,22 +195,31 @@ public class TransaksiView extends javax.swing.JPanel {
         });
 
         hitungPanel.setBackground(new java.awt.Color(255, 153, 153));
+        hitungPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Tgl_Pinjam");
+        hitungPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 15, 74, -1));
+        hitungPanel.add(tglPinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 15, 216, -1));
 
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Tgl_Kembali");
+        hitungPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 50, 74, -1));
+        hitungPanel.add(tglKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 50, 216, 23));
 
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Lama");
+        hitungPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 79, 74, -1));
 
         txtLama.setEditable(false);
+        hitungPanel.add(txtLama, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 79, 216, -1));
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Total");
+        hitungPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 113, 74, -1));
 
         txtTotal.setEditable(false);
+        hitungPanel.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 109, 216, -1));
 
         btnHitung.setText("Hitung");
         btnHitung.addActionListener(new java.awt.event.ActionListener() {
@@ -202,54 +227,9 @@ public class TransaksiView extends javax.swing.JPanel {
                 btnHitungActionPerformed(evt);
             }
         });
+        hitungPanel.add(btnHitung, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
 
-        javax.swing.GroupLayout hitungPanelLayout = new javax.swing.GroupLayout(hitungPanel);
-        hitungPanel.setLayout(hitungPanelLayout);
-        hitungPanelLayout.setHorizontalGroup(
-            hitungPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hitungPanelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(hitungPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(hitungPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHitung)
-                    .addGroup(hitungPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtTotal)
-                        .addComponent(txtLama, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(tglKembali, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tglPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
-        hitungPanelLayout.setVerticalGroup(
-            hitungPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hitungPanelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(hitungPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addGroup(hitungPanelLayout.createSequentialGroup()
-                        .addComponent(tglPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(hitungPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(tglKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(hitungPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(txtLama, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(hitungPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(btnHitung)
-                .addContainerGap())
-        );
-
-        panelUtama.setBackground(new java.awt.Color(102, 255, 153));
+        transaksiPanel.setBackground(new java.awt.Color(102, 255, 153));
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Id_Transaksi");
@@ -271,12 +251,14 @@ public class TransaksiView extends javax.swing.JPanel {
         txtIdTransaksi.setEditable(false);
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Peminjam");
+        jLabel4.setText("Nama Peminjam");
 
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Harga");
 
         txtHarga.setEditable(false);
+
+        txtMerek.setEditable(false);
 
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Merek");
@@ -284,116 +266,160 @@ public class TransaksiView extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Tipe");
 
-        javax.swing.GroupLayout panelUtamaLayout = new javax.swing.GroupLayout(panelUtama);
-        panelUtama.setLayout(panelUtamaLayout);
-        panelUtamaLayout.setHorizontalGroup(
-            panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUtamaLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtIdMobil)
-                        .addComponent(txtIdTransaksi))
-                    .addGroup(panelUtamaLayout.createSequentialGroup()
+        txtTipe.setEditable(false);
+
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Status");
+
+        txtStatus.setEditable(false);
+
+        javax.swing.GroupLayout transaksiPanelLayout = new javax.swing.GroupLayout(transaksiPanel);
+        transaksiPanel.setLayout(transaksiPanelLayout);
+        transaksiPanelLayout.setHorizontalGroup(
+            transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(transaksiPanelLayout.createSequentialGroup()
+                .addGroup(transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtIdTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtNamaPeminjam, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtIdMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104)
+                        .addComponent(jLabel10)
+                        .addGap(85, 85, 85)
+                        .addComponent(txtMerek, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel9)
+                        .addGap(39, 39, 39)
                         .addComponent(cmbNoPol, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)))
-                .addGap(104, 104, 104)
-                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelUtamaLayout.createSequentialGroup()
-                        .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtHarga)
-                    .addComponent(txtMerek, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPeminjam, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addComponent(txtTipe))
-                .addGap(25, 25, 25))
+                        .addGap(106, 106, 106)
+                        .addComponent(jLabel11)
+                        .addGap(97, 97, 97)
+                        .addComponent(txtTipe, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(315, 315, 315)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(315, 315, 315)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
-        panelUtamaLayout.setVerticalGroup(
-            panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelUtamaLayout.createSequentialGroup()
+        transaksiPanelLayout.setVerticalGroup(
+            transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(transaksiPanelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                .addGroup(transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtIdTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtPeminjam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtIdMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNamaPeminjam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))))
+                .addGap(6, 6, 6)
+                .addGroup(transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtIdMobil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMerek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel10))))
+                .addGap(6, 6, 6)
+                .addGroup(transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel9))
                     .addComponent(cmbNoPol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel11)
-                    .addComponent(txtTipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel11))
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(txtTipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6)
+                .addGroup(transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel5))
+                    .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(transaksiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(transaksiPanelLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel12))
+                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
+
+        jLabel13.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Data Transaksi Rental Mobil");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(panelUtama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(hitungPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(362, 362, 362)
-                        .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnKembalikan)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(transaksiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hitungPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(btnKembalikan)
+                .addGap(337, 337, 337))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(13, 13, 13)
+                .addComponent(jLabel13)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(hitungPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelUtama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(transaksiPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSimpan)
                     .addComponent(btnUpdate)
                     .addComponent(btnReset)
-                    .addComponent(btnSimpan)
                     .addComponent(btnKembalikan))
-                .addGap(37, 37, 37)
+                .addGap(6, 6, 6)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
-        controller.insertTransaksi();
-        controller.getAllTransaksi();
-        controller.reset();
+        if(controller.insertTransaksi() == true){
+            controller.getAllTransaksi();
+            controller.reset();            
+        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void tblTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTransaksiMouseClicked
@@ -421,16 +447,20 @@ public class TransaksiView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void cmbNoPolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNoPolActionPerformed
-        // TODO add your handling code here:
-        controller.fillField(cmbNoPol.getSelectedItem().toString());
+        // Jika combobox kosong maka tidak akan mengisi txt field lainnya
+        if(cmbNoPol.getSelectedIndex()>-1){
+            controller.fillField(cmbNoPol.getSelectedItem().toString());            
+        }
     }//GEN-LAST:event_cmbNoPolActionPerformed
 
     private void btnHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungActionPerformed
         // TODO add your handling code here:
         Long tgl_pinjam = getTglPinjam().getDate().getTime();
         Long tgl_kembali = getTglKembali().getDate().getTime();
-        Long selisih = (tgl_kembali - tgl_pinjam) / (24*60*60*1000);
-        int total = (int) (selisih * (Integer.parseInt(getTxtHarga().getText())));
+        // Convert timestamp menjadi satuan hari
+        int selisih = (int) ((tgl_kembali - tgl_pinjam) / (24*60*60*1000));
+        
+        int total = selisih * (Integer.parseInt(getTxtHarga().getText()));
         getTxtLama().setText(String.valueOf(selisih));
         getTxtTotal().setText(String.valueOf(total));
     }//GEN-LAST:event_btnHitungActionPerformed
@@ -447,6 +477,8 @@ public class TransaksiView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -456,16 +488,17 @@ public class TransaksiView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel panelUtama;
     private javax.swing.JTable tblTransaksi;
     private com.toedter.calendar.JDateChooser tglKembali;
     private com.toedter.calendar.JDateChooser tglPinjam;
+    private javax.swing.JPanel transaksiPanel;
     private javax.swing.JTextField txtHarga;
     private javax.swing.JTextField txtIdMobil;
     private javax.swing.JTextField txtIdTransaksi;
     private javax.swing.JTextField txtLama;
     private javax.swing.JTextField txtMerek;
-    private javax.swing.JTextField txtPeminjam;
+    private javax.swing.JTextField txtNamaPeminjam;
+    private javax.swing.JTextField txtStatus;
     private javax.swing.JTextField txtTipe;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables

@@ -30,13 +30,12 @@ public class TransaksiDaoImpl implements TransaksiDao{
     private Connection conn = null;
     private final String updateTransaksi = "UPDATE tb_transaksi SET id_mobil=?, peminjam=?, harga=?, tgl_pinjaman=?, tgl_kembali=?, lama=?, total=? WHERE id_transaksi=?";
     private final String deleteTransaksi = "DELETE FROM tb_transaksi WHERE id_transaksi = ?";
-    private final String selectAll = "SELECT * FROM tb_transaksi";
+    
 
     public TransaksiDaoImpl() throws SQLException, IOException{
        this.conn = koneksiDB.getConnection();
     }
        
-    
     /*
      * Query untuk insert data ke table Transaksi
      */
@@ -67,6 +66,7 @@ public class TransaksiDaoImpl implements TransaksiDao{
     }
 
     /**
+     * Query untuk update transaksi
      * @param transaksi
      * @throws SQLException 
      */
@@ -89,6 +89,12 @@ public class TransaksiDaoImpl implements TransaksiDao{
         }
     }
 
+    /**
+     * Query untuk delete Transaksi
+     * @param id_transaksi
+     * @param idMobil
+     * @throws SQLException 
+     */
     @Override
     public void deleteTransaksi(int id_transaksi, int idMobil) throws SQLException{
         PreparedStatement stmt1 = null;
@@ -102,31 +108,41 @@ public class TransaksiDaoImpl implements TransaksiDao{
         }
     }
 
+    /**
+     * Query untuk ambil data transaksi
+     * @return 
+     */
     @Override
-    public List<TransaksiModel> getAllTransaksi() {
+    public List<TransaksiModel> getAllTransaksi() throws SQLException{
+        String SQL = "SELECT * FROM tb_transaksi";
         Statement stmt = null;
         List<TransaksiModel> list = new ArrayList<>();
-        try{
-            stmt = conn.createStatement();
-            ResultSet result = stmt.executeQuery(selectAll);
-            while(result.next()){
-                TransaksiModel transaksi = new TransaksiModel();
-                transaksi.setIdTransaksi(result.getInt("id_transaksi"));
-                transaksi.setIdMobil(result.getInt("id_mobil"));
-                transaksi.setPeminjam(result.getString("peminjam"));
-                transaksi.setHarga(result.getString("harga"));
-                transaksi.setTgl_pinjaman(result.getString("tgl_pinjaman"));
-                transaksi.setTgl_kembali(result.getString("tgl_kembali"));
-                transaksi.setLama(result.getString("lama"));
-                transaksi.setTotal(result.getString("total"));
-                list.add(transaksi);
-            }
-            return list;
-        }catch(SQLException ex){
-            return null;
+        stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery(SQL);
+        while(result.next()){
+            TransaksiModel transaksi = new TransaksiModel();
+            transaksi.setIdTransaksi(result.getInt("id_transaksi"));
+            transaksi.setIdMobil(result.getInt("id_mobil"));
+            transaksi.setPeminjam(result.getString("peminjam"));
+            transaksi.setHarga(result.getString("harga"));
+            transaksi.setTgl_pinjaman(result.getString("tgl_pinjaman"));
+            transaksi.setTgl_kembali(result.getString("tgl_kembali"));
+            transaksi.setLama(result.getString("lama"));
+            transaksi.setTotal(result.getString("total"));
+            list.add(transaksi);
         }
+        return list;
     }
 
+    /**
+     * Query Select berdasarkan param
+     * @param namaKolom
+     * @param namaTable
+     * @param kondisi
+     * @param value
+     * @return
+     * @throws SQLException 
+     */
     @Override
     public ResultSet querySelect(String namaKolom, String namaTable, String kondisi , String value) throws SQLException{
         String SQL = "SELECT "+ namaKolom +" FROM "+ namaTable + " WHERE " + kondisi + "='" + value + "'";
@@ -141,10 +157,14 @@ public class TransaksiDaoImpl implements TransaksiDao{
         }
     }
     
+    /**
+     * Query Select table
+     * @param namaTable
+     * @return 
+     */
     @Override
     public ResultSet querySelect(String namaTable){
-        String selectAllMobil = "SELECT * FROM tb_mobil";
-
+        String selectAllMobil = "SELECT * FROM " + namaTable;
         Statement stmt = null;
         try {
             stmt = conn.createStatement();
@@ -159,6 +179,7 @@ public class TransaksiDaoImpl implements TransaksiDao{
     /**
      * Update status mobil di table mobil menjadi Keluar
      * @param idMobil
+     * @param status
      * @throws SQLException 
      */
     public void updateStatus(int idMobil, String status) throws SQLException{

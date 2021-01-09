@@ -6,7 +6,10 @@
 package MVC.main;
 
 import MVC.view.MainView;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +25,8 @@ public class RentalMobil {
         } catch(SQLException ex){
             JOptionPane.showMessageDialog(main, "Database Tidak Ditemukan");
             System.exit(0);
+        } catch (IOException ex) {
+            Logger.getLogger(RentalMobil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
