@@ -122,9 +122,7 @@ public class MobilController {
             return;
         }
 
-        if (JOptionPane.showConfirmDialog(view, "Anda yakin akan menghapus?")
-                == JOptionPane.OK_OPTION) {
-
+        if (JOptionPane.showConfirmDialog(view, "Anda yakin akan menghapus?") == JOptionPane.OK_OPTION) {
             int idMobil = Integer.parseInt(view.getTxtIdMobil().getText());
             model.setId_mobil(idMobil);
 

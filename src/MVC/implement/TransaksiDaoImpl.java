@@ -27,6 +27,7 @@ import java.util.logging.Logger;
  */
 public class TransaksiDaoImpl implements TransaksiDao{
     private Connection conn = null;    
+    private String SQL;
 
     public TransaksiDaoImpl() throws SQLException, IOException{
        this.conn = koneksiDB.getConnection();
@@ -34,10 +35,12 @@ public class TransaksiDaoImpl implements TransaksiDao{
        
     /**
      * Query untuk insert data ke table Transaksi
+     * @param transaksi
+     * @throws java.sql.SQLException
      */
     @Override
     public void insertTransaksi(TransaksiModel transaksi) throws SQLException  {
-        String SQL = "INSERT INTO tb_transaksi (id_mobil, peminjam, harga, tgl_pinjaman, tgl_kembali, lama, total) "
+        SQL = "INSERT INTO tb_transaksi (id_mobil, peminjam, harga, tgl_pinjaman, tgl_kembali, lama, total) "
             + "VALUES(?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = null;
         try {
@@ -68,7 +71,7 @@ public class TransaksiDaoImpl implements TransaksiDao{
      */
     @Override
     public void updateTransaksi(TransaksiModel transaksi) throws SQLException {
-        String SQL = "UPDATE tb_transaksi SET id_mobil=?, peminjam=?, harga=?, tgl_pinjaman=?, tgl_kembali=?, lama=?, total=? WHERE id_transaksi=?";
+        SQL = "UPDATE tb_transaksi SET id_mobil=?, peminjam=?, harga=?, tgl_pinjaman=?, tgl_kembali=?, lama=?, total=? WHERE id_transaksi=?";
         PreparedStatement stmt = null;
         try {
             stmt = conn.prepareStatement(SQL);
@@ -88,13 +91,12 @@ public class TransaksiDaoImpl implements TransaksiDao{
 
     /**
      * Query untuk delete Transaksi
-     * @param id_transaksi
-     * @param idMobil
+     * @param transaksi
      * @throws SQLException 
      */
     @Override
     public void deleteTransaksi(TransaksiModel transaksi) throws SQLException{
-        String SQL = "DELETE FROM tb_transaksi WHERE id_transaksi = ?";
+        SQL = "DELETE FROM tb_transaksi WHERE id_transaksi = ?";
 
         PreparedStatement stmt1 = null;
         try {
@@ -110,10 +112,11 @@ public class TransaksiDaoImpl implements TransaksiDao{
     /**
      * Query untuk ambil data transaksi
      * @return 
+     * @throws java.sql.SQLException 
      */
     @Override
     public List<TransaksiModel> getAllTransaksi() throws SQLException{
-        String SQL = "SELECT * FROM tb_transaksi";
+        SQL = "SELECT * FROM tb_transaksi ORDER BY id_transaksi";
         Statement stmt = null;
         List<TransaksiModel> list = new ArrayList<>();
         stmt = conn.createStatement();
@@ -144,7 +147,7 @@ public class TransaksiDaoImpl implements TransaksiDao{
      */
     @Override
     public ResultSet querySelect(String namaKolom, String namaTable, String kondisi , String value) throws SQLException{
-        String SQL = "SELECT "+ namaKolom +" FROM "+ namaTable + " WHERE " + kondisi + "='" + value + "'";
+        SQL = "SELECT "+ namaKolom +" FROM "+ namaTable + " WHERE " + kondisi + "='" + value + "'";
         Statement stmt = null;
         try {
             stmt = conn.createStatement();
@@ -163,11 +166,11 @@ public class TransaksiDaoImpl implements TransaksiDao{
      */
     @Override
     public ResultSet querySelect(String namaTable){
-        String selectAllMobil = "SELECT * FROM " + namaTable;
+        SQL = "SELECT * FROM " + namaTable ;
         Statement stmt = null;
         try {
             stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(selectAllMobil);
+            ResultSet rs = stmt.executeQuery(SQL);
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(TransaksiDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -182,10 +185,10 @@ public class TransaksiDaoImpl implements TransaksiDao{
      * @throws SQLException 
      */
     public void updateStatus(int idMobil, String status) throws SQLException{
-        final String updateMobil = "UPDATE tb_mobil SET status=? WHERE id_mobil=?";
+        SQL = "UPDATE tb_mobil SET status=? WHERE id_mobil=?";
         PreparedStatement stmt = null;
         try {
-            stmt = conn.prepareStatement(updateMobil);
+            stmt = conn.prepareStatement(SQL);
             stmt.setString(1, status);
             stmt.setInt(2, idMobil);
             stmt.executeUpdate();

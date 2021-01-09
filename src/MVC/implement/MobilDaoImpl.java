@@ -24,10 +24,7 @@ import java.io.IOException;
 public class MobilDaoImpl implements MobilDao{
 
     private Connection conn = null;
-    private final String insertMobil = "INSERT INTO tb_mobil (merek, tipe, tahun, nopol, harga, status) VALUES(?, ?, ?, ?, ?, ?)";
-    private final String updateMobil = "UPDATE tb_mobil SET merek=?, tipe=?, tahun=?, nopol=?, harga=?, status=? WHERE id_mobil=?";
-    private final String deleteMobil = "DELETE FROM tb_mobil WHERE id_mobil=?";
-    private final String selectAll = "SELECT * FROM tb_mobil";
+    private String SQL;
 
     public MobilDaoImpl() throws SQLException, IOException{
         this.conn = koneksiDB.getConnection();
@@ -35,9 +32,10 @@ public class MobilDaoImpl implements MobilDao{
     
     @Override
     public void insertMobil(MobilModel mobil) throws SQLException {
+        SQL = "INSERT INTO tb_mobil (merek, tipe, tahun, nopol, harga, status) VALUES(?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = null;
         try {
-            statement = conn.prepareStatement(insertMobil, Statement.RETURN_GENERATED_KEYS);
+            statement = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, mobil.getMerek());
             statement.setString(2, mobil.getTipe());
             statement.setInt(3, mobil.getTahun());
@@ -55,10 +53,11 @@ public class MobilDaoImpl implements MobilDao{
 
     @Override
     public void updateMobil(MobilModel mobil) throws SQLException {
+        SQL = "UPDATE tb_mobil SET merek=?, tipe=?, tahun=?, nopol=?, harga=?, status=? WHERE id_mobil=?";
         PreparedStatement statement = null;
 
         try {
-            statement = conn.prepareStatement(updateMobil);
+            statement = conn.prepareStatement(SQL);
             statement.setString(1, mobil.getMerek());
             statement.setString(2, mobil.getTipe());
             statement.setInt(3, mobil.getTahun());
@@ -74,9 +73,10 @@ public class MobilDaoImpl implements MobilDao{
 
     @Override
     public void deleteMobil(Integer id_mobil) throws SQLException {
+        SQL = "DELETE FROM tb_mobil WHERE id_mobil=?";
         PreparedStatement statement = null;
         try {
-            statement = conn.prepareStatement(deleteMobil);
+            statement = conn.prepareStatement(SQL);
             statement.setInt(1, id_mobil);
             statement.executeUpdate();
             conn.commit();
@@ -87,12 +87,13 @@ public class MobilDaoImpl implements MobilDao{
 
     @Override
     public List<MobilModel> getAllMobil() {
+        SQL = "SELECT * FROM tb_mobil ORDER BY id_mobil";
         Statement statement = null;
         List<MobilModel> list = new ArrayList<>();
         try {
             statement = conn.createStatement();
 
-            ResultSet result = statement.executeQuery(selectAll);
+            ResultSet result = statement.executeQuery(SQL);
             while (result.next()) {
                 MobilModel mobil = new MobilModel();
                 mobil.setId_mobil(result.getInt("id_mobil"));
