@@ -31,8 +31,7 @@ public class TransaksiView extends javax.swing.JPanel {
         this.controller = new TransaksiController(this);
         controller.getAllTransaksi();
         controller.getNopol();
-        controller.reset();
-        
+        controller.reset();        
     }
     
    

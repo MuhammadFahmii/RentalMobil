@@ -48,11 +48,11 @@ public class TransaksiController {
     public void getAllTransaksi(){
         try {
             list = dao.getAllTransaksi();
+            TableTransaksiModel tableModel = new TableTransaksiModel(list);
+            view.getTblTransaksi().setModel(tableModel);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(view, "Gagal mengambil data", "Failed", JOptionPane.ERROR_MESSAGE);
         }
-        TableTransaksiModel tableModel = new TableTransaksiModel(list);
-        view.getTblTransaksi().setModel(tableModel);
     }
     
     /**
@@ -124,7 +124,7 @@ public class TransaksiController {
             return;
         }
         try {
-            model.setIdMobil(Integer.parseInt(view.getTxtIdMobil().getText()));
+            model.setIdTransaksi(Integer.parseInt(view.getTxtIdTransaksi().getText()));
             model.setHarga(Integer.parseInt(view.getTxtIdTransaksi().getText()));
             if( JOptionPane.showConfirmDialog(view, "Apakah Anda Yakin?") == JOptionPane.OK_OPTION){
                 dao.deleteTransaksi(model);

@@ -101,7 +101,7 @@ public class TransaksiDaoImpl implements TransaksiDao{
         PreparedStatement stmt1 = null;
         try {
             stmt1 = conn.prepareStatement(SQL);
-            stmt1.setInt(1, transaksi.getIdMobil());
+            stmt1.setInt(1, transaksi.getIdTransaksi());
             stmt1.executeUpdate();
             this.updateStatus(transaksi.getIdMobil(), "Tersedia");
         } finally {
