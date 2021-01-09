@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import MVC.service.MobilDao;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -69,6 +67,7 @@ public class MobilDaoImpl implements MobilDao{
             statement.setString(6, mobil.getStatus());
             statement.setInt(7, mobil.getId_mobil());
             statement.executeUpdate();
+            this.queryTbTransaksi(mobil.getId_mobil(), mobil.getHarga());
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -110,6 +109,19 @@ public class MobilDaoImpl implements MobilDao{
         } catch (SQLException exception) {
             System.out.println(exception.getMessage());
             return null;
+        }
+    }
+    
+    public void queryTbTransaksi(int idMobil, int harga) throws SQLException{
+        String SQL1 = "UPDATE tb_transaksi SET harga=? WHERE id_mobil=?";
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement(SQL1);
+            stmt.setInt(1, harga);
+            stmt.setInt(2, idMobil);
+            stmt.executeUpdate();
+        } finally  {
+            stmt.close();
         }
     }
     
