@@ -5,13 +5,17 @@
  */
 package MVC.model.transaksi;
 
+import java.util.Date;
+
 /**
  *
  * @author Heinz
  */
 public class TransaksiModel {
-    private int idTransaksi, idMobil, harga;
-    private String peminjam, tgl_pinjaman, tgl_kembali, lama, total;
+    private int idTransaksi, idMobil, harga, total;
+    private String peminjam, lama;
+    private Date tgl_pinjaman, tgl_kembali;
+    
     
     public int getIdTransaksi() {
         return idTransaksi;
@@ -45,19 +49,19 @@ public class TransaksiModel {
         this.harga = harga;
     }
 
-    public String getTgl_pinjaman() {
+    public Date getTgl_pinjaman() {
         return tgl_pinjaman;
     }
 
-    public void setTgl_pinjaman(String tgl_pinjaman) {
+    public void setTgl_pinjaman(Date tgl_pinjaman) {
         this.tgl_pinjaman = tgl_pinjaman;
     }
 
-    public String getTgl_kembali() {
+    public Date getTgl_kembali() {
         return tgl_kembali;
     }
 
-    public void setTgl_kembali(String tgl_kembali) {
+    public void setTgl_kembali(Date tgl_kembali) {
         this.tgl_kembali = tgl_kembali;
     }
 
@@ -69,11 +73,11 @@ public class TransaksiModel {
         this.lama = lama;
     }
 
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 }

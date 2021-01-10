@@ -10,6 +10,7 @@ import MVC.model.transaksi.TransaksiModel;
 import MVC.service.TransaksiDao;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,10 +49,10 @@ public class TransaksiDaoImpl implements TransaksiDao{
             stmt.setInt(1, transaksi.getIdMobil());
             stmt.setString(2, transaksi.getPeminjam());
             stmt.setInt(3, transaksi.getHarga());
-            stmt.setString(4, transaksi.getTgl_pinjaman());
-            stmt.setString(5, transaksi.getTgl_kembali());
+            stmt.setDate(4, new java.sql.Date(transaksi.getTgl_pinjaman().getTime()));
+            stmt.setDate(5, new java.sql.Date(transaksi.getTgl_kembali().getTime()));
             stmt.setString(6, transaksi.getLama());
-            stmt.setString(7, transaksi.getTotal());
+            stmt.setInt(7, transaksi.getTotal());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             while(rs.next()){
@@ -78,10 +79,10 @@ public class TransaksiDaoImpl implements TransaksiDao{
             stmt.setInt(1, transaksi.getIdMobil());
             stmt.setString(2, transaksi.getPeminjam());
             stmt.setInt(3, transaksi.getHarga());
-            stmt.setString(4, transaksi.getTgl_pinjaman());
-            stmt.setString(5, transaksi.getTgl_kembali());
+            stmt.setDate(4, (Date) transaksi.getTgl_pinjaman());
+            stmt.setDate(5, (Date) transaksi.getTgl_kembali());
             stmt.setString(6, transaksi.getLama());
-            stmt.setString(7, transaksi.getTotal());
+            stmt.setInt(7, transaksi.getTotal());
             stmt.setInt(8, transaksi.getIdTransaksi());
             stmt.executeUpdate();
         } finally  {
@@ -105,7 +106,6 @@ public class TransaksiDaoImpl implements TransaksiDao{
             stmt1.executeUpdate();
             this.updateStatus(transaksi.getIdMobil(), "Tersedia");
         } finally {
-            stmt1.close();
         }
     }
 
@@ -127,10 +127,10 @@ public class TransaksiDaoImpl implements TransaksiDao{
             transaksi.setIdMobil(result.getInt("id_mobil"));
             transaksi.setPeminjam(result.getString("peminjam"));
             transaksi.setHarga(result.getInt("harga"));
-            transaksi.setTgl_pinjaman(result.getString("tgl_pinjaman"));
-            transaksi.setTgl_kembali(result.getString("tgl_kembali"));
+            transaksi.setTgl_pinjaman(result.getDate("tgl_pinjaman"));
+            transaksi.setTgl_kembali(result.getDate("tgl_kembali"));
             transaksi.setLama(result.getString("lama"));
-            transaksi.setTotal(result.getString("total"));
+            transaksi.setTotal(result.getInt("total"));
             list.add(transaksi);
         }
         return list;
@@ -195,6 +195,7 @@ public class TransaksiDaoImpl implements TransaksiDao{
         } catch (SQLException ex) {
             Logger.getLogger(TransaksiDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+            System.out.println(stmt);
             stmt.close();
         }
     }

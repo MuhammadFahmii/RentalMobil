@@ -107,10 +107,10 @@ public class TransaksiController {
         model.setIdMobil(Integer.parseInt(view.getTxtIdMobil().getText()));
         model.setPeminjam(view.getTxtNamaPeminjam().getText());
         model.setHarga(Integer.parseInt(view.getTxtHarga().getText()));
-        model.setTgl_pinjaman(sdf.format(view.getTglPinjam().getDate()));
-        model.setTgl_kembali(sdf.format(view.getTglKembali().getDate()));
+        model.setTgl_pinjaman(view.getTglPinjam().getDate());
+        model.setTgl_kembali(view.getTglKembali().getDate());
         model.setLama(view.getTxtLama().getText());
-        model.setTotal(view.getTxtTotal().getText());
+        model.setTotal(Integer.parseInt(view.getTxtTotal().getText()));
         if(method.equals("update")) model.setIdTransaksi(Integer.parseInt(view.getTxtIdTransaksi().getText()));
     }
     
@@ -124,7 +124,7 @@ public class TransaksiController {
             return;
         }
         try {
-            model.setIdTransaksi(Integer.parseInt(view.getTxtIdTransaksi().getText()));
+            model.setIdMobil(Integer.parseInt(view.getTxtIdMobil().getText()));
             model.setHarga(Integer.parseInt(view.getTxtIdTransaksi().getText()));
             if( JOptionPane.showConfirmDialog(view, "Apakah Anda Yakin?") == JOptionPane.OK_OPTION){
                 dao.deleteTransaksi(model);
@@ -212,9 +212,9 @@ public class TransaksiController {
             while(rs.next()){
                 view.getCmbNoPol().setSelectedItem(rs.getString("nopol"));
             }
-            view.getTglPinjam().setDate(sdf.parse(list.get(row).getTgl_pinjaman()));
-            view.getTglKembali().setDate(sdf.parse(list.get(row).getTgl_kembali()));
-        } catch (ParseException | SQLException ex) {
+            view.getTglPinjam().setDate(list.get(row).getTgl_pinjaman());
+            view.getTglKembali().setDate(list.get(row).getTgl_kembali());
+        } catch (SQLException ex) {
             Logger.getLogger(TransaksiController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
