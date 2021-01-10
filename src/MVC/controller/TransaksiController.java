@@ -15,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
@@ -124,6 +123,7 @@ public class TransaksiController {
             return;
         }
         try {
+            model.setIdTransaksi(Integer.parseInt(view.getTxtIdTransaksi().getText()));
             model.setIdMobil(Integer.parseInt(view.getTxtIdMobil().getText()));
             model.setHarga(Integer.parseInt(view.getTxtIdTransaksi().getText()));
             if( JOptionPane.showConfirmDialog(view, "Apakah Anda Yakin?") == JOptionPane.OK_OPTION){

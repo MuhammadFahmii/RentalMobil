@@ -91,7 +91,7 @@ public class TableTransaksiModel extends AbstractTableModel{
             case 6:
                 return list.get(rowIndex).getLama() + " Hari";
             case 7:
-                return list.get(rowIndex).getTotal();
+                return kurs(list.get(rowIndex).getTotal());
             default:
                 return null;
         }

@@ -20,9 +20,6 @@ public class RentalMobil {
         try {
             main = new MainView();
             main.setVisible(true);
-            java.util.Date utilDate = new java.util.Date();
-            java.sql.Date sql = new java.sql.Date(utilDate.getTime());
-            System.out.println(sql);
         } catch(SQLException ex){
             JOptionPane.showMessageDialog(main, ex.getMessage(), "Database Tidak Ditemukan", JOptionPane.ERROR_MESSAGE);
             System.exit(0);

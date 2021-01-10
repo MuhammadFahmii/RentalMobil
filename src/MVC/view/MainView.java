@@ -19,7 +19,9 @@ public final class MainView extends javax.swing.JFrame {
     private TransaksiView transaksiView;
     private MobilView mobilView;
     
-    /** Creates new form MainView 
+    /** Creates new form MainView
+     * @throws java.sql.SQLException
+     * @throws java.io.IOException
      */
     public MainView() throws SQLException, IOException  {
         initComponents();
@@ -27,6 +29,7 @@ public final class MainView extends javax.swing.JFrame {
         mobilView = new MobilView();
         transaksiView = new TransaksiView();
         contentPanel.add(berandaView);
+        
     }
     
     /** This method is called from within the constructor to
@@ -48,7 +51,6 @@ public final class MainView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Rental Mobil");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(1290, 560));
         setResizable(false);
 
         bodyPanel.setBackground(new java.awt.Color(9, 132, 227));
@@ -210,9 +212,7 @@ public final class MainView extends javax.swing.JFrame {
             public void run() {
                 try {
                     new MainView().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
+                } catch (SQLException | IOException ex) {
                     Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
